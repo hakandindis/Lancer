@@ -1,0 +1,20 @@
+package hakandindis.lancer.di
+
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import hakandindis.lancer.data.remote.HeroService
+import retrofit2.Retrofit
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+class ServiceModule {
+
+    @Provides
+    @Singleton
+    fun provideCharacterService(retrofit: Retrofit): HeroService {
+        return retrofit.create(HeroService::class.java)
+    }
+}
