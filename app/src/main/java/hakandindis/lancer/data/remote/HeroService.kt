@@ -2,7 +2,6 @@ package hakandindis.lancer.data.remote
 
 import hakandindis.lancer.data.model.Hero
 import retrofit2.http.GET
-import retrofit2.http.Path
 
 interface HeroService {
 
