@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
-    val BASE_URL = "https://api.opendota.com/api/"
+    private const val BASE_URL = "https://api.opendota.com/api/"
 
     @Provides
     @Singleton
