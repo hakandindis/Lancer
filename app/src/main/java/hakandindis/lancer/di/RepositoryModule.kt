@@ -17,7 +17,7 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideCharacterRepository(heroService: HeroService): HeroRepository {
+    fun provideHeroRepository(heroService: HeroService): HeroRepository {
         return HeroRepository(heroService)
     }
 

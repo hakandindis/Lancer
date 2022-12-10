@@ -1,8 +1,11 @@
 package hakandindis.lancer.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 
+@Parcelize
 data class Hero (
     @SerializedName("id"                ) var id              : Int?              = null,
     @SerializedName("name"              ) var name            : String?           = null,
@@ -15,8 +18,8 @@ data class Hero (
     @SerializedName("base_health"       ) var baseHealth      : Int?              = null,
     @SerializedName("base_health_regen" ) var baseHealthRegen : Double?           = null,
     @SerializedName("base_mana"         ) var baseMana        : Int?              = null,
-    @SerializedName("base_mana_regen"   ) var baseManaRegen   : Int?              = null,
-    @SerializedName("base_armor"        ) var baseArmor       : Int?              = null,
+    @SerializedName("base_mana_regen"   ) var baseManaRegen   : Double?           = null,
+    @SerializedName("base_armor"        ) var baseArmor       : Double?           = null,
     @SerializedName("base_mr"           ) var baseMr          : Int?              = null,
     @SerializedName("base_attack_min"   ) var baseAttackMin   : Int?              = null,
     @SerializedName("base_attack_max"   ) var baseAttackMax   : Int?              = null,
@@ -57,4 +60,4 @@ data class Hero (
     @SerializedName("8_win"             ) var Win8            : Int?              = null,
     @SerializedName("null_pick"         ) var nullPick        : Int?              = null,
     @SerializedName("null_win"          ) var nullWin         : Int?              = null
-)
+) : Parcelable

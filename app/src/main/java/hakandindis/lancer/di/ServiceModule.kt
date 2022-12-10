@@ -15,7 +15,7 @@ class ServiceModule {
 
     @Provides
     @Singleton
-    fun provideCharacterService(retrofit: Retrofit): HeroService {
+    fun provideHeroService(retrofit: Retrofit): HeroService {
         return retrofit.create(HeroService::class.java)
     }
 

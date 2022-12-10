@@ -4,4 +4,6 @@ import hakandindis.lancer.data.remote.HeroService
 import javax.inject.Inject
 
 class HeroRepository @Inject constructor(private val heroService: HeroService) {
+
+    suspend fun getAllHeroes() = heroService.getAllHeroes()
 }
