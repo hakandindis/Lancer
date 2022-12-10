@@ -17,6 +17,9 @@ class HeroViewModel @Inject constructor(private val heroRepository: HeroReposito
     val heroes: LiveData<List<Hero>>
         get() = _heroes
 
+    init {
+        getAllHeroes()
+    }
 
     fun getAllHeroes() = viewModelScope.launch {
         _heroes.value = heroRepository.getAllHeroes()
