@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import hakandindis.lancer.R
 import hakandindis.lancer.data.model.Hero
 import hakandindis.lancer.databinding.HeroItemBinding
 
@@ -28,6 +29,13 @@ class HeroViewHolder(private val binding: HeroItemBinding) : RecyclerView.ViewHo
             nameText.text = hero.localizedName
             attackTypeText.text = hero.attackType
             Glide.with(heroImg).load(url).into(heroImg)
+
+            when (hero.primaryAttr) {
+                "str" -> Glide.with(attributeImg).load(R.drawable.strength).into(attributeImg)
+                "agi" -> Glide.with(attributeImg).load(R.drawable.agility).into(attributeImg)
+                "int" -> Glide.with(attributeImg).load(R.drawable.intelligence).into(attributeImg)
+                else -> {}
+            }
         }
     }
 }
