@@ -1,6 +1,8 @@
 package hakandindis.lancer.ui.hero
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,6 +23,7 @@ class HeroFragment : Fragment(R.layout.fragment_hero) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        initListeners()
         initObservers()
     }
 
@@ -28,8 +31,30 @@ class HeroFragment : Fragment(R.layout.fragment_hero) {
         binding.heroList.adapter = this.adapter
     }
 
+    private fun initListeners() {
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s != null) {
+                    viewModel.searchHero(s)
+                } else if (count == 0) {
+                    viewModel.getAllHeroes()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+    }
+
     private fun initObservers() {
         viewModel.heroes.observe(viewLifecycleOwner) {
+            if (it != null) adapter.submitList(it)
+        }
+
+        viewModel.filteredHeroes.observe(viewLifecycleOwner) {
             if (it != null) adapter.submitList(it)
         }
     }

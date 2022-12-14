@@ -17,12 +17,26 @@ class HeroViewModel @Inject constructor(private val heroRepository: HeroReposito
     val heroes: LiveData<List<Hero>>
         get() = _heroes
 
+    private var _filteredHeroes: MutableLiveData<List<Hero>?> = MutableLiveData()
+    val filteredHeroes: LiveData<List<Hero>?>
+        get() = _filteredHeroes
+
     init {
         getAllHeroes()
     }
 
     fun getAllHeroes() = viewModelScope.launch {
         _heroes.value = heroRepository.getAllHeroes()
+    }
+
+    fun searchHero(filterText: CharSequence) {
+        val filteredHeroes = heroes.value?.filter {
+            it.localizedName?.lowercase()?.contains(filterText) ?: false
+        }
+
+        if (filteredHeroes != null) {
+            _filteredHeroes.value = filteredHeroes!!
+        }
     }
 
 }
