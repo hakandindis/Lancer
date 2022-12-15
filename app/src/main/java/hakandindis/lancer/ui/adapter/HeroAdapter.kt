@@ -6,24 +6,28 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import hakandindis.lancer.R
 import hakandindis.lancer.data.model.Hero
 import hakandindis.lancer.databinding.HeroItemBinding
 
 class HeroAdapter : ListAdapter<Hero, HeroViewHolder>(HeroDiffUtilCallback) {
 
+    var onHeroClick: (Hero) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroViewHolder {
         val binding = HeroItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HeroViewHolder(binding)
+        return HeroViewHolder(binding, onHeroClick)
     }
 
     override fun onBindViewHolder(holder: HeroViewHolder, position: Int) = holder.bind(currentList[position])
 }
 
-class HeroViewHolder(private val binding: HeroItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class HeroViewHolder(private val binding: HeroItemBinding, private val onProductClick: (Hero) -> Unit) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bind(hero: Hero) {
         val url = "https://api.opendota.com${hero.img}"
+
+        binding.root.setOnClickListener { onProductClick(hero) }
 
         with(binding) {
             nameText.text = hero.localizedName

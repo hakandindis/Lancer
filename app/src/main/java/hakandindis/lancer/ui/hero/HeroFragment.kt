@@ -3,6 +3,7 @@ package hakandindis.lancer.ui.hero
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,6 +33,12 @@ class HeroFragment : Fragment(R.layout.fragment_hero) {
     }
 
     private fun initListeners() {
+
+        adapter.onHeroClick = {
+            viewModel.insertHero(it)
+        }
+
+
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -56,6 +63,12 @@ class HeroFragment : Fragment(R.layout.fragment_hero) {
 
         viewModel.filteredHeroes.observe(viewLifecycleOwner) {
             if (it != null) adapter.submitList(it)
+        }
+
+        viewModel.savedHeroes.observe(viewLifecycleOwner) {
+            if (it != null) {
+                Log.d("HAKANDINDIS", it.toString())
+            }
         }
     }
 }
