@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import hakandindis.lancer.data.local.dao.HeroDao
+import hakandindis.lancer.data.local.dao.TeamDao
 import hakandindis.lancer.data.remote.HeroService
 import hakandindis.lancer.data.remote.TeamService
 import hakandindis.lancer.data.repository.HeroRepository
@@ -18,8 +20,8 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideHeroRepository(heroService: HeroService): HeroRepository {
-        return HeroRepository(heroService)
+    fun provideHeroRepository(heroService: HeroService, heroDao: HeroDao): HeroRepository {
+        return HeroRepository(heroService, heroDao)
     }
 
     @Provides
@@ -30,7 +32,7 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideSavedRepository(): SavedRepository {
-        return SavedRepository()
+    fun provideSavedRepository(heroDao: HeroDao, teamDao: TeamDao): SavedRepository {
+        return SavedRepository(heroDao, teamDao)
     }
 }
