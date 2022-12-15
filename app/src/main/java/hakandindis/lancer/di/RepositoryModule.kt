@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import hakandindis.lancer.data.remote.HeroService
 import hakandindis.lancer.data.remote.TeamService
 import hakandindis.lancer.data.repository.HeroRepository
+import hakandindis.lancer.data.repository.SavedRepository
 import hakandindis.lancer.data.repository.TeamRepository
 import javax.inject.Singleton
 
@@ -25,5 +26,11 @@ class RepositoryModule {
     @Singleton
     fun provideTeamRepository(teamService: TeamService): TeamRepository {
         return TeamRepository(teamService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSavedRepository(): SavedRepository {
+        return SavedRepository()
     }
 }
