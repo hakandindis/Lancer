@@ -29,11 +29,22 @@ class HomeActivity : AppCompatActivity() {
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.heroFragment, R.id.teamFragment)
-        )
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.heroFragment, R.id.teamFragment, R.id.savedFragment))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    fun initListeners() {
+        binding.navView.setOnItemSelectedListener {
+            val navController = findNavController(R.id.fragmentContainerView)
+            when (it.itemId) {
+                R.id.heroFragment -> {}
+                R.id.teamFragment -> {}
+                R.id.savedFragment -> {}
+            }
+
+            return@setOnItemSelectedListener false
+        }
     }
 }

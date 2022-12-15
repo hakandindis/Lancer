@@ -30,12 +30,12 @@ class HeroViewHolder(private val binding: HeroItemBinding) : RecyclerView.ViewHo
             attackTypeText.text = hero.attackType
             Glide.with(heroImg).load(url).into(heroImg)
 
-            when (hero.primaryAttr) {
-                "str" -> Glide.with(attributeImg).load(R.drawable.strength).into(attributeImg)
-                "agi" -> Glide.with(attributeImg).load(R.drawable.agility).into(attributeImg)
-                "int" -> Glide.with(attributeImg).load(R.drawable.intelligence).into(attributeImg)
-                else -> {}
-            }
+//            when (hero.primaryAttr) {
+//                "str" -> Glide.with(attributeImg).load(R.drawable.strength).into(attributeImg)
+//                "agi" -> Glide.with(attributeImg).load(R.drawable.agility).into(attributeImg)
+//                "int" -> Glide.with(attributeImg).load(R.drawable.intelligence).into(attributeImg)
+//                else -> {}
+//            }
         }
     }
 }

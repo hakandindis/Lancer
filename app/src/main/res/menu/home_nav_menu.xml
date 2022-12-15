@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/heroFragment"
         android:enabled="true"
         android:icon="@drawable/strength"
-        android:title="For you" />
+        android:title="home" />
+
     <item
         android:id="@+id/teamFragment"
         android:enabled="true"
         android:icon="@drawable/agility"
+        android:title="Team" />
+
+    <item
+        android:id="@+id/savedFragment"
+        android:enabled="true"
+        android:icon="@drawable/intelligence"
         android:title="Saved" />
 
 </menu>
