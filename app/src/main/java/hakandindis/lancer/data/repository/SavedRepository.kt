@@ -1,6 +1,7 @@
 package hakandindis.lancer.data.repository
 
 import hakandindis.lancer.data.local.dao.HeroDao
+import hakandindis.lancer.data.local.entity.HeroEntity
 import javax.inject.Inject
 
 class SavedRepository @Inject constructor(
@@ -8,4 +9,6 @@ class SavedRepository @Inject constructor(
 ) {
 
     fun getAllSavedHeroes() = heroDao.getAllHeroes()
+
+    suspend fun deleteHero(heroEntity: HeroEntity) = heroDao.deleteHero(heroEntity)
 }

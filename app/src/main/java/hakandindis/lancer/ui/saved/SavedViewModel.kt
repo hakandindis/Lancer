@@ -20,7 +20,11 @@ class SavedViewModel @Inject constructor(private val savedRepository: SavedRepos
         getAllSavedHeroes()
     }
 
-    fun getAllSavedHeroes() = viewModelScope.launch {
+    private fun getAllSavedHeroes() = viewModelScope.launch {
         savedHeroes = savedRepository.getAllSavedHeroes()
+    }
+
+    fun deleteHero(heroEntity: HeroEntity) = viewModelScope.launch {
+        savedRepository.deleteHero(heroEntity)
     }
 }
