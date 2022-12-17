@@ -37,13 +37,6 @@ class SavedViewHolder(private val binding: SavedHeroItemBinding, private val onS
                 if (hero.roles[0] != null) firstRoleText.text = hero.roles[0]
                 if (hero.roles[1] != null) secondRoleText.text = hero.roles[1]
             }
-
-//            when (hero.primaryAttr) {
-//                "str" -> Glide.with(attributeImg).load(R.drawable.strength).into(attributeImg)
-//                "agi" -> Glide.with(attributeImg).load(R.drawable.agility).into(attributeImg)
-//                "int" -> Glide.with(attributeImg).load(R.drawable.intelligence).into(attributeImg)
-//                else -> {}
-//            }
         }
     }
 }
@@ -52,5 +45,4 @@ object SavedHeroDiffUtilCallback : DiffUtil.ItemCallback<HeroEntity>() {
     override fun areItemsTheSame(oldItem: HeroEntity, newItem: HeroEntity): Boolean = (oldItem.id == newItem.id)
 
     override fun areContentsTheSame(oldItem: HeroEntity, newItem: HeroEntity): Boolean = (oldItem == newItem)
-
 }

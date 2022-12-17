@@ -34,9 +34,8 @@ class HeroViewModel @Inject constructor(private val heroRepository: HeroReposito
             it.localizedName?.lowercase()?.contains(filterText) ?: false
         }
 
-        if (filteredHeroes != null) {
-            _filteredHeroes.value = filteredHeroes!!
-        }
+        if (filteredHeroes != null) _filteredHeroes.value = filteredHeroes!!
+
     }
 
     fun insertHero(hero: Hero) = viewModelScope.launch {

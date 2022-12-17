@@ -5,11 +5,12 @@ import androidx.room.*
 import hakandindis.lancer.data.local.dao.HeroDao
 import hakandindis.lancer.data.local.dao.TeamDao
 import hakandindis.lancer.data.local.entity.HeroEntity
+import hakandindis.lancer.data.local.entity.TeamEntity
 
 @Database(
-    entities = [HeroEntity::class],
-    version = 2,
-    autoMigrations = [AutoMigration(from = 1, to = 2)]
+    entities = [HeroEntity::class, TeamEntity::class],
+    version = 1,
+//    autoMigrations = [AutoMigration(from = 2, to = 3)]
 )
 @TypeConverters(HeroTypeConverters::class)
 abstract class LancerDatabase : RoomDatabase() {

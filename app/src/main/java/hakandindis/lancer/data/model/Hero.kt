@@ -63,10 +63,11 @@ data class Hero (
     @SerializedName("null_win"          ) var nullWin         : Int?              = null
 ) : Parcelable {
     fun toEntity():HeroEntity = HeroEntity(
-        name = this.localizedName,
-        img = this.img,
+        id          = this.heroId,
+        name        = this.localizedName,
+        img         = this.img,
         primaryAttr = this.primaryAttr,
-        attackType = this.attackType,
-        roles = this.roles
+        attackType  = this.attackType,
+        roles       = this.roles
     )
 }

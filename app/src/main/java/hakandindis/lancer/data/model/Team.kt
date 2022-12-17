@@ -2,6 +2,7 @@ package hakandindis.lancer.data.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import hakandindis.lancer.data.local.entity.TeamEntity
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -14,4 +15,15 @@ data class Team (
     @SerializedName("name"            ) var name          : String? = null,
     @SerializedName("tag"             ) var tag           : String? = null,
     @SerializedName("logo_url"        ) var logoUrl       : String? = null
-): Parcelable
+): Parcelable {
+    fun toEntity(): TeamEntity = TeamEntity(
+        teamId        = this.teamId,
+        name          = this.name,
+        rating        = this.rating,
+        wins          = this.wins,
+        losses        = this.losses,
+        lastMatchTime = this.lastMatchTime,
+        tag           = this.tag,
+        logoUrl       = this.logoUrl
+    )
+}

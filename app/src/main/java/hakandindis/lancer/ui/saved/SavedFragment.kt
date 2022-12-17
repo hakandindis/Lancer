@@ -1,6 +1,7 @@
 package hakandindis.lancer.ui.saved
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,7 +32,7 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
 
     private fun initListeners() {
         adapter.onSavedHeroClick = {
-            MaterialAlertDialogBuilder(requireContext(),R.style.AlertDialogTheme)
+            MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                 .setTitle("Silmek istediğinize emin misiniz?")
                 .setMessage("Bu işlem geri alınamaz ancak daha sonrasında bu kahramanı tekrar kaydedebilirsiniz")
                 .setNegativeButton("Vazgeç") { dialog, which ->
@@ -48,6 +49,15 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
     private fun initObservers() {
         viewModel.savedHeroes.observe(viewLifecycleOwner) {
             if (it != null) adapter.submitList(it)
+        }
+
+        viewModel.savedTeams.observe(viewLifecycleOwner) {
+            if (it != null) {
+                it.forEach { team ->
+                    Log.d("SAVED-TEAM", team.toString())
+                }
+                Log.d("SAVED-TEAM", "-------------------------------------------------------------------------")
+            }
         }
     }
 }

@@ -14,5 +14,4 @@ class HeroRepository @Inject constructor(
 
     suspend fun insertHero(hero: Hero) = heroDao.insertHero(hero.toEntity())
 
-    fun getAllSavedHeroes() = heroDao.getAllHeroes()
 }

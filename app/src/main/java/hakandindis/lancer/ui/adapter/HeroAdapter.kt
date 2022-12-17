@@ -21,25 +21,18 @@ class HeroAdapter : ListAdapter<Hero, HeroViewHolder>(HeroDiffUtilCallback) {
     override fun onBindViewHolder(holder: HeroViewHolder, position: Int) = holder.bind(currentList[position])
 }
 
-class HeroViewHolder(private val binding: HeroItemBinding, private val onProductClick: (Hero) -> Unit) :
+class HeroViewHolder(private val binding: HeroItemBinding, private val onHeroClick: (Hero) -> Unit) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(hero: Hero) {
         val url = "https://api.opendota.com${hero.img}"
-
-        binding.root.setOnClickListener { onProductClick(hero) }
 
         with(binding) {
             nameText.text = hero.localizedName
             attackTypeText.text = hero.attackType
             Glide.with(heroImg).load(url).into(heroImg)
 
-//            when (hero.primaryAttr) {
-//                "str" -> Glide.with(attributeImg).load(R.drawable.strength).into(attributeImg)
-//                "agi" -> Glide.with(attributeImg).load(R.drawable.agility).into(attributeImg)
-//                "int" -> Glide.with(attributeImg).load(R.drawable.intelligence).into(attributeImg)
-//                else -> {}
-//            }
+            root.setOnClickListener { onHeroClick(hero) }
         }
     }
 }
@@ -48,5 +41,4 @@ object HeroDiffUtilCallback : DiffUtil.ItemCallback<Hero>() {
     override fun areItemsTheSame(oldItem: Hero, newItem: Hero): Boolean = oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: Hero, newItem: Hero): Boolean = oldItem == newItem
-
 }

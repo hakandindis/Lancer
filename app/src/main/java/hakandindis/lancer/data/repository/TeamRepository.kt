@@ -1,6 +1,7 @@
 package hakandindis.lancer.data.repository
 
 import hakandindis.lancer.data.local.dao.TeamDao
+import hakandindis.lancer.data.model.Team
 import hakandindis.lancer.data.remote.TeamService
 import javax.inject.Inject
 
@@ -10,4 +11,6 @@ class TeamRepository @Inject constructor(
 ) {
 
     suspend fun getAllTeams() = teamService.getAllTeams()
+
+    suspend fun insertTeam(team: Team) = teamDao.insertTeam(team.toEntity())
 }
