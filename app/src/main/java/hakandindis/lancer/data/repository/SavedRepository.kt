@@ -7,5 +7,5 @@ class SavedRepository @Inject constructor(
     private val heroDao: HeroDao
 ) {
 
-    suspend fun getAllSavedHeroes() = heroDao.getAllHeroes()
+    fun getAllSavedHeroes() = heroDao.getAllHeroes()
 }

@@ -1,7 +1,6 @@
 package hakandindis.lancer.ui.saved
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,9 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SavedViewModel @Inject constructor(private val savedRepository: SavedRepository) : ViewModel() {
 
-    private var _savedHeroes: MutableLiveData<List<HeroEntity>> = MutableLiveData()
-    val savedHeroes: LiveData<List<HeroEntity>>
-        get() = _savedHeroes
+    lateinit var savedHeroes: LiveData<List<HeroEntity>>
 
 
     init {
@@ -24,6 +21,6 @@ class SavedViewModel @Inject constructor(private val savedRepository: SavedRepos
     }
 
     fun getAllSavedHeroes() = viewModelScope.launch {
-        _savedHeroes.value = savedRepository.getAllSavedHeroes()
+        savedHeroes = savedRepository.getAllSavedHeroes()
     }
 }

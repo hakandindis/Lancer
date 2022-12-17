@@ -3,6 +3,8 @@ package hakandindis.lancer.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import hakandindis.lancer.data.database.HeroTypeConverters
 
 @Entity(tableName = "heroes")
 data class HeroEntity(
@@ -19,5 +21,9 @@ data class HeroEntity(
     val primaryAttr: String? = null,
 
     @ColumnInfo(name = "attack_type")
-    val attackType: String? = null
+    val attackType: String? = null,
+
+    @ColumnInfo(name = "roles")
+    @TypeConverters(HeroTypeConverters::class)
+    val roles: ArrayList<String>? = null
 )

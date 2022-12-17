@@ -1,5 +1,6 @@
 package hakandindis.lancer.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import hakandindis.lancer.data.local.entity.HeroEntity
 
@@ -16,5 +17,5 @@ interface HeroDao {
     suspend fun deleteHero(heroEntity: HeroEntity)
 
     @Query("SELECT * FROM heroes")
-    suspend fun getAllHeroes(): List<HeroEntity>
+    fun getAllHeroes(): LiveData<List<HeroEntity>>
 }

@@ -2,6 +2,7 @@ package hakandindis.lancer.data.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import hakandindis.lancer.data.local.entity.HeroEntity
 import kotlinx.parcelize.Parcelize
 
 
@@ -60,4 +61,12 @@ data class Hero (
     @SerializedName("8_win"             ) var Win8            : Int?              = null,
     @SerializedName("null_pick"         ) var nullPick        : Int?              = null,
     @SerializedName("null_win"          ) var nullWin         : Int?              = null
-) : Parcelable
+) : Parcelable {
+    fun toEntity():HeroEntity = HeroEntity(
+        name = this.localizedName,
+        img = this.img,
+        primaryAttr = this.primaryAttr,
+        attackType = this.attackType,
+        roles = this.roles
+    )
+}
