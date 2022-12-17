@@ -8,7 +8,12 @@ import hakandindis.lancer.data.local.dao.HeroDao
 import hakandindis.lancer.data.local.dao.TeamDao
 import hakandindis.lancer.data.local.entity.HeroEntity
 
-@Database(entities = [HeroEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [HeroEntity::class],
+    version = 1,
+    exportSchema = true,
+//    autoMigrations = [AutoMigration(from = 1, to = 2)]
+)
 abstract class LancerDatabase : RoomDatabase() {
 
     abstract fun heroDao(): HeroDao

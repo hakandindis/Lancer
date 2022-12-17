@@ -8,7 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hakandindis.lancer.data.local.entity.HeroEntity
 import hakandindis.lancer.data.model.Hero
 import hakandindis.lancer.data.repository.HeroRepository
-import hakandindis.lancer.util.heroToEntity
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -46,8 +45,7 @@ class HeroViewModel @Inject constructor(private val heroRepository: HeroReposito
     }
 
     fun insertHero(hero: Hero) = viewModelScope.launch {
-        val heroEntity = heroToEntity(hero)
-        heroRepository.insertHero(heroEntity)
+        heroRepository.insertHero(hero)
 
         _savedHeroes.value = heroRepository.getAllSavedHeroes()
     }

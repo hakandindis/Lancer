@@ -26,13 +26,13 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideTeamRepository(teamService: TeamService): TeamRepository {
-        return TeamRepository(teamService)
+    fun provideTeamRepository(teamService: TeamService, teamDao: TeamDao): TeamRepository {
+        return TeamRepository(teamService, teamDao)
     }
 
     @Provides
     @Singleton
-    fun provideSavedRepository(heroDao: HeroDao, teamDao: TeamDao): SavedRepository {
-        return SavedRepository(heroDao, teamDao)
+    fun provideSavedRepository(heroDao: HeroDao): SavedRepository {
+        return SavedRepository(heroDao)
     }
 }

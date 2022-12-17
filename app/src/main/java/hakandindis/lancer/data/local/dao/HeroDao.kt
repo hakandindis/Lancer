@@ -6,10 +6,10 @@ import hakandindis.lancer.data.local.entity.HeroEntity
 @Dao
 interface HeroDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHero(heroEntity: HeroEntity)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateHero(heroEntity: HeroEntity)
 
     @Delete

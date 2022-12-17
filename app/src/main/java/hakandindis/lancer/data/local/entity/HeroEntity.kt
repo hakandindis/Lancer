@@ -17,4 +17,7 @@ data class HeroEntity(
 
     @ColumnInfo(name = "primary_attr")
     val primaryAttr: String? = null,
+
+    @ColumnInfo(name = "attack_type")
+    val attackType: String? = null
 )
