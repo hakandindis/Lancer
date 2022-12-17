@@ -18,7 +18,6 @@ class SavedHeroAdapter : ListAdapter<HeroEntity, SavedViewHolder>(SavedHeroDiffU
     }
 
     override fun onBindViewHolder(holder: SavedViewHolder, position: Int) = holder.bind(currentList[position])
-
 }
 
 class SavedViewHolder(private val binding: SavedHeroItemBinding, private val onSavedHeroClick: (HeroEntity) -> Unit) :
