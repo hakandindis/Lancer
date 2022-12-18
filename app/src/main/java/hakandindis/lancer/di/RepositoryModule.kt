@@ -32,7 +32,7 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideSavedRepository(heroDao: HeroDao,teamDao: TeamDao): SavedRepository {
-        return SavedRepository(heroDao,teamDao)
+    fun provideSavedRepository(heroDao: HeroDao, teamDao: TeamDao): SavedRepository {
+        return SavedRepository(heroDao, teamDao)
     }
 }

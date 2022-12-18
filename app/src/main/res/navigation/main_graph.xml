@@ -15,15 +15,41 @@
         android:id="@+id/heroFragment"
         android:name="hakandindis.lancer.ui.hero.HeroFragment"
         android:label="fragment_hero"
-        tools:layout="@layout/fragment_hero" />
+        tools:layout="@layout/fragment_hero" >
+        <action
+            android:id="@+id/hero_to_detail"
+            app:destination="@id/heroDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/teamFragment"
         android:name="hakandindis.lancer.ui.team.TeamFragment"
         android:label="fragment_team"
-        tools:layout="@layout/fragment_team" />
+        tools:layout="@layout/fragment_team" >
+        <action
+            android:id="@+id/team_to_detail"
+            app:destination="@id/teamDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/savedFragment"
         android:name="hakandindis.lancer.ui.saved.SavedFragment"
         android:label="fragment_saved"
         tools:layout="@layout/fragment_saved" />
+    <fragment
+        android:id="@+id/teamDetailFragment"
+        android:name="hakandindis.lancer.ui.team.TeamDetailFragment"
+        android:label="fragment_team_detail"
+        tools:layout="@layout/fragment_team_detail" >
+        <argument
+            android:name="team"
+            app:argType="hakandindis.lancer.data.model.Team" />
+    </fragment>
+    <fragment
+        android:id="@+id/heroDetailFragment"
+        android:name="hakandindis.lancer.ui.hero.HeroDetailFragment"
+        android:label="fragment_hero_detail"
+        tools:layout="@layout/fragment_hero_detail" >
+        <argument
+            android:name="hero"
+            app:argType="hakandindis.lancer.data.model.Hero" />
+    </fragment>
 </navigation>

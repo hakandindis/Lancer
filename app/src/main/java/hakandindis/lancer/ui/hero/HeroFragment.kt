@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hakandindis.lancer.R
 import hakandindis.lancer.databinding.FragmentHeroBinding
@@ -34,9 +35,9 @@ class HeroFragment : Fragment(R.layout.fragment_hero) {
     private fun initListeners() {
 
         adapter.onHeroClick = {
-            viewModel.insertHero(it)
+            val action = HeroFragmentDirections.heroToDetail(it)
+            findNavController().navigate(action)
         }
-
 
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
