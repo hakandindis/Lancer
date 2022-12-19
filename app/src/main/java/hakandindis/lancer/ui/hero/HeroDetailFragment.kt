@@ -40,12 +40,8 @@ class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
                     else -> {}
                 }
 
-                it.roles.let { roles ->
-                    if (roles[0] != null) {
-                        firstRoleText.text = roles[0]
-                    } else {
-                        firstRoleCard.visibility = View.INVISIBLE
-                    }
+                it.roles?.let { roles ->
+                    firstRoleText.text = roles[0]
 
                     if (roles.size >= 2 && roles[1] != null) {
                         secondRoleText.text = roles[1]

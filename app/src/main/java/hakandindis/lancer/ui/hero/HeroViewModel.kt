@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hakandindis.lancer.data.local.entity.HeroEntity
 import hakandindis.lancer.data.model.Hero
 import hakandindis.lancer.data.repository.HeroRepository
 import kotlinx.coroutines.launch
@@ -17,16 +18,23 @@ class HeroViewModel @Inject constructor(private val heroRepository: HeroReposito
     val heroes: LiveData<List<Hero>>
         get() = _heroes
 
+    lateinit var savedHeroes: LiveData<List<HeroEntity>>
+
     private var _filteredHeroes: MutableLiveData<List<Hero>?> = MutableLiveData()
     val filteredHeroes: LiveData<List<Hero>?>
         get() = _filteredHeroes
 
     init {
         getAllHeroes()
+        getAllSavedHeroes()
     }
 
     fun getAllHeroes() = viewModelScope.launch {
         _heroes.value = heroRepository.getAllHeroes()
+    }
+
+    fun getAllSavedHeroes() = viewModelScope.launch {
+        savedHeroes = heroRepository.getAllSavedHeroes()
     }
 
     fun searchHero(filterText: CharSequence) {

@@ -6,11 +6,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import hakandindis.lancer.R
 import hakandindis.lancer.databinding.FragmentSavedBinding
 import hakandindis.lancer.extension.viewBinding
 import hakandindis.lancer.ui.adapter.SavedHeroAdapter
+import hakandindis.lancer.ui.adapter.SavedViewPagerAdapter
 
 @AndroidEntryPoint
 class SavedFragment : Fragment(R.layout.fragment_saved) {
@@ -18,6 +20,7 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
     private val binding by viewBinding(FragmentSavedBinding::bind)
     private val adapter by lazy { SavedHeroAdapter() }
     private val viewModel: SavedViewModel by viewModels()
+    private lateinit var viewPagerAdapter: SavedViewPagerAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,7 +30,13 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
     }
 
     private fun initViews() {
-        binding.heroList.adapter = adapter
+        val names = listOf("Heroes", "Teams")
+        viewPagerAdapter = SavedViewPagerAdapter(childFragmentManager, lifecycle)
+        binding.viewPager.adapter = viewPagerAdapter
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = names[position]
+        }.attach()
     }
 
     private fun initListeners() {
