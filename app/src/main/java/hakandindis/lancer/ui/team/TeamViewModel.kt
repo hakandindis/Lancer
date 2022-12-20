@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hakandindis.lancer.data.local.entity.TeamEntity
 import hakandindis.lancer.data.model.Team
 import hakandindis.lancer.data.repository.TeamRepository
 import kotlinx.coroutines.launch
@@ -21,12 +22,19 @@ class TeamViewModel @Inject constructor(private val teamRepository: TeamReposito
     val filteredTeams: LiveData<List<Team>>
         get() = _filteredTeams
 
-    init {
-        getAllTeams()
-    }
+    lateinit var savedTeams: LiveData<List<TeamEntity>>
+
+    private var _filteredSavedTeams: MutableLiveData<List<TeamEntity>> = MutableLiveData()
+    val filteredSavedTeams: LiveData<List<TeamEntity>>
+        get() = _filteredSavedTeams
+
 
     fun getAllTeams() = viewModelScope.launch {
         _teams.value = teamRepository.getAllTeams()
+    }
+
+    fun getAllSavedTeams() {
+        savedTeams = teamRepository.getAllSavedTeams()
     }
 
     fun searchTeam(filterText: CharSequence) {

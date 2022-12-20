@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import hakandindis.lancer.data.model.Team
 import hakandindis.lancer.databinding.TeamItemBinding
+import hakandindis.lancer.util.PageType
 
-class TeamAdapter : ListAdapter<Team, TeamViewHolder>(TeamDiffUtilCallback) {
+class TeamAdapter(pageType: PageType) : ListAdapter<Team, TeamViewHolder>(TeamDiffUtilCallback) {
 
     var onTeamClicked: (Team) -> Unit = {}
 

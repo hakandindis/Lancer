@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import hakandindis.lancer.data.model.Hero
 import hakandindis.lancer.databinding.HeroItemBinding
+import hakandindis.lancer.util.PageType
 
-class HeroAdapter : ListAdapter<Hero, HeroViewHolder>(HeroDiffUtilCallback) {
+class HeroAdapter(pageType: PageType) : ListAdapter<Hero, HeroViewHolder>(HeroDiffUtilCallback) {
 
     var onHeroClick: (Hero) -> Unit = {}
 

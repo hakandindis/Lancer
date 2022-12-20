@@ -11,13 +11,37 @@ import hakandindis.lancer.R
 import hakandindis.lancer.databinding.FragmentTeamBinding
 import hakandindis.lancer.extension.viewBinding
 import hakandindis.lancer.ui.adapter.TeamAdapter
+import hakandindis.lancer.util.PAGE_TYPE
+import hakandindis.lancer.util.PageType
 
 @AndroidEntryPoint
 class TeamFragment : Fragment(R.layout.fragment_team) {
 
     private val binding by viewBinding(FragmentTeamBinding::bind)
-    private val adapter by lazy { TeamAdapter() }
     private val viewModel: TeamViewModel by viewModels()
+    private lateinit var adapter: TeamAdapter
+    private lateinit var pageType: PageType
+
+    companion object {
+        @JvmStatic
+        fun newInstance(pageType: PageType) = TeamFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(PAGE_TYPE, pageType)
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null && requireArguments().containsKey(PAGE_TYPE)) {
+            pageType = requireArguments().getSerializable(PAGE_TYPE) as PageType
+        }
+
+        when (pageType) {
+            PageType.HOME -> viewModel.getAllTeams()
+            PageType.SAVED -> viewModel.getAllSavedTeams()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,13 +51,14 @@ class TeamFragment : Fragment(R.layout.fragment_team) {
     }
 
     private fun initViews() {
+        adapter = TeamAdapter(pageType)
         binding.teamList.adapter = adapter
     }
 
     private fun initListeners() {
 
         adapter.onTeamClicked = {
-            viewModel.insertTeam(it)
+//            viewModel.insertTeam(it)
         }
 
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
@@ -54,12 +79,32 @@ class TeamFragment : Fragment(R.layout.fragment_team) {
     }
 
     private fun initObservers() {
-        viewModel.teams.observe(viewLifecycleOwner) {
-            if (it != null) adapter.submitList(it)
-        }
+        when (pageType) {
+            PageType.HOME -> {
+                viewModel.teams.observe(viewLifecycleOwner) {
+                    if (it != null) adapter.submitList(it)
+                }
 
-        viewModel.filteredTeams.observe(viewLifecycleOwner) {
-            if (it != null) adapter.submitList(it)
+                viewModel.filteredTeams.observe(viewLifecycleOwner) {
+                    if (it != null) adapter.submitList(it)
+                }
+            }
+
+            PageType.SAVED -> {
+                viewModel.savedTeams.observe(viewLifecycleOwner) { entities ->
+                    if (entities != null) {
+                        val value = entities.map { it.toModel() }
+                        adapter.submitList(value)
+                    }
+                }
+
+                viewModel.filteredSavedTeams.observe(viewLifecycleOwner) { entities ->
+                    if (entities != null) {
+                        val value = entities.map { it.toModel() }
+                        adapter.submitList(value)
+                    }
+                }
+            }
         }
     }
 }

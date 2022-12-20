@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DaoModule {
 
-    private val DATABASENAME = "lancer_database"
+    private val DATABASE_NAME = "lancer_database"
 
     @Provides
     @Singleton
@@ -25,7 +25,7 @@ class DaoModule {
         return Room.databaseBuilder(
             context,
             LancerDatabase::class.java,
-            DATABASENAME
+            DATABASE_NAME
         ).build()
     }
 

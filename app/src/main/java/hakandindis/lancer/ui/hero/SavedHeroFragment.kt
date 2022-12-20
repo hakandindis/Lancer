@@ -11,13 +11,14 @@ import hakandindis.lancer.databinding.FragmentSavedHeroBinding
 import hakandindis.lancer.extension.viewBinding
 import hakandindis.lancer.ui.adapter.HeroAdapter
 import hakandindis.lancer.ui.saved.SavedFragmentDirections
+import hakandindis.lancer.util.PageType
 
 
 @AndroidEntryPoint
 class SavedHeroFragment : Fragment(R.layout.fragment_saved_hero) {
 
     private val binding by viewBinding(FragmentSavedHeroBinding::bind)
-    private val adapter by lazy { HeroAdapter() }
+    private val adapter by lazy { HeroAdapter(PageType.SAVED) }
     private val viewModel: HeroViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,6 +47,4 @@ class SavedHeroFragment : Fragment(R.layout.fragment_saved_hero) {
             }
         }
     }
-
-
 }

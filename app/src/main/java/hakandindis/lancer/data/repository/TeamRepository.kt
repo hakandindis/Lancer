@@ -12,5 +12,7 @@ class TeamRepository @Inject constructor(
 
     suspend fun getAllTeams() = teamService.getAllTeams()
 
+    fun getAllSavedTeams() = teamDao.getAllTeams()
+
     suspend fun insertTeam(team: Team) = teamDao.insertTeam(team.toEntity())
 }
