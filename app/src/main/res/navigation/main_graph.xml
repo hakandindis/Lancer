@@ -3,31 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/heroFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="hakandindis.lancer.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-    </fragment>
-    <fragment
-        android:id="@+id/heroFragment"
-        android:name="hakandindis.lancer.ui.hero.HeroFragment"
-        android:label="fragment_hero"
-        tools:layout="@layout/fragment_hero" >
         <action
-            android:id="@+id/hero_to_detail"
-            app:destination="@id/heroDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/teamFragment"
-        android:name="hakandindis.lancer.ui.team.TeamFragment"
-        android:label="fragment_team"
-        tools:layout="@layout/fragment_team" >
-        <action
-            android:id="@+id/team_to_detail"
+            android:id="@+id/home_to_team_detail"
             app:destination="@id/teamDetailFragment" />
+        <action
+            android:id="@+id/home_to_hero_detail"
+            app:destination="@id/heroDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"

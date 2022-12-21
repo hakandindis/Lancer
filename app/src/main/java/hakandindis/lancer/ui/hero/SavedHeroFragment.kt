@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hakandindis.lancer.R
 import hakandindis.lancer.databinding.FragmentSavedHeroBinding
 import hakandindis.lancer.extension.viewBinding
 import hakandindis.lancer.ui.adapter.HeroAdapter
-import hakandindis.lancer.ui.saved.SavedFragmentDirections
 import hakandindis.lancer.util.PageType
 
 
@@ -34,8 +32,8 @@ class SavedHeroFragment : Fragment(R.layout.fragment_saved_hero) {
 
     private fun initListeners() {
         adapter.onHeroClick = {
-            val action = SavedFragmentDirections.savedToHeroDetail(it)
-            findNavController().navigate(action)
+//            val action = SavedFragmentDirections.savedToHeroDetail(it)
+//            findNavController().navigate(action)
         }
     }
 

@@ -6,11 +6,14 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hakandindis.lancer.R
 import hakandindis.lancer.databinding.FragmentTeamBinding
 import hakandindis.lancer.extension.viewBinding
 import hakandindis.lancer.ui.adapter.TeamAdapter
+import hakandindis.lancer.ui.home.HomeFragmentDirections
+import hakandindis.lancer.ui.saved.SavedFragmentDirections
 import hakandindis.lancer.util.PAGE_TYPE
 import hakandindis.lancer.util.PageType
 
@@ -58,7 +61,16 @@ class TeamFragment : Fragment(R.layout.fragment_team) {
     private fun initListeners() {
 
         adapter.onTeamClicked = {
-//            viewModel.insertTeam(it)
+            when (pageType) {
+                PageType.HOME -> {
+                    val action = HomeFragmentDirections.homeToTeamDetail(it)
+                    findNavController().navigate(action)
+                }
+                PageType.SAVED -> {
+                    val action = SavedFragmentDirections.savedToTeamDetail(it)
+                    findNavController().navigate(action)
+                }
+            }
         }
 
         binding.searchEditText.addTextChangedListener(object : TextWatcher {

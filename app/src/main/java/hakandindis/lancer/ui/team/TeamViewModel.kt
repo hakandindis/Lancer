@@ -45,6 +45,14 @@ class TeamViewModel @Inject constructor(private val teamRepository: TeamReposito
         if (filteredTeams != null) _filteredTeams.value = filteredTeams!!
     }
 
+    fun searchSavedTeam(filterText: CharSequence) {
+        val filteredTeams = savedTeams.value?.filter {
+            it.name?.lowercase()?.contains(filterText) ?: false
+        }
+
+//        if (filteredTeams != null)
+    }
+
     fun insertTeam(team: Team) = viewModelScope.launch {
         teamRepository.insertTeam(team)
     }

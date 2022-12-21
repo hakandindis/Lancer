@@ -12,6 +12,8 @@ import hakandindis.lancer.R
 import hakandindis.lancer.databinding.FragmentHeroBinding
 import hakandindis.lancer.extension.viewBinding
 import hakandindis.lancer.ui.adapter.HeroAdapter
+import hakandindis.lancer.ui.home.HomeFragmentDirections
+import hakandindis.lancer.ui.saved.SavedFragmentDirections
 import hakandindis.lancer.util.PAGE_TYPE
 import hakandindis.lancer.util.PageType
 
@@ -37,15 +39,16 @@ class HeroFragment : Fragment(R.layout.fragment_hero) {
         if (arguments != null && requireArguments().containsKey(PAGE_TYPE)) {
             pageType = requireArguments().getSerializable(PAGE_TYPE) as PageType
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         when (pageType) {
             PageType.HOME -> viewModel.getAllHeroes()
             PageType.SAVED -> viewModel.getAllSavedHeroes()
         }
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initViews()
         initListeners()
         initObservers()
@@ -59,8 +62,16 @@ class HeroFragment : Fragment(R.layout.fragment_hero) {
     private fun initListeners() {
 
         adapter.onHeroClick = {
-            val action = HeroFragmentDirections.heroToDetail(it)
-            findNavController().navigate(action)
+            when (pageType) {
+                PageType.HOME -> {
+                    val action = HomeFragmentDirections.homeToHeroDetail(it)
+                    findNavController().navigate(action)
+                }
+                PageType.SAVED -> {
+                    val action = SavedFragmentDirections.savedToHeroDetail(it)
+                    findNavController().navigate(action)
+                }
+            }
         }
 
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
@@ -68,11 +79,24 @@ class HeroFragment : Fragment(R.layout.fragment_hero) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s != null) {
-                    viewModel.searchHero(s)
-                } else if (count == 0) {
-                    viewModel.getAllHeroes()
+                when (pageType) {
+                    PageType.HOME -> {
+                        if (s != null) {
+                            viewModel.searchHero(s)
+                        } else if (count == 0) {
+                            viewModel.getAllHeroes()
+                        }
+                    }
+                    PageType.SAVED -> {
+                        if (s != null) {
+
+                        } else if (count == 0) {
+                            viewModel.getAllSavedHeroes()
+                        }
+                    }
                 }
+
+
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -81,12 +105,24 @@ class HeroFragment : Fragment(R.layout.fragment_hero) {
     }
 
     private fun initObservers() {
-        viewModel.heroes.observe(viewLifecycleOwner) {
-            if (it != null) adapter.submitList(it)
+        when (pageType) {
+            PageType.HOME -> {
+                viewModel.heroes.observe(viewLifecycleOwner) {
+                    if (it != null) adapter.submitList(it)
+                }
+
+                viewModel.filteredHeroes.observe(viewLifecycleOwner) {
+                    if (it != null) adapter.submitList(it)
+                }
+            }
+            PageType.SAVED -> {
+                viewModel.savedHeroes.observe(viewLifecycleOwner) { entities ->
+                    val value = entities.map { it.toModel() }
+                    if (entities != null) adapter.submitList(value)
+                }
+            }
         }
 
-        viewModel.filteredHeroes.observe(viewLifecycleOwner) {
-            if (it != null) adapter.submitList(it)
-        }
+
     }
 }
