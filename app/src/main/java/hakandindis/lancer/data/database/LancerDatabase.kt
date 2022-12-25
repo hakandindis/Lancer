@@ -21,7 +21,7 @@ abstract class LancerDatabase : RoomDatabase() {
 
     companion object {
 
-        val DATABASENAME = "lancer_database"
+        private const val DATABASE_NAME = "lancer_database"
 
         @Volatile
         private var INSTANCE: LancerDatabase? = null
@@ -31,7 +31,7 @@ abstract class LancerDatabase : RoomDatabase() {
                 return Room.databaseBuilder(
                     context.applicationContext,
                     LancerDatabase::class.java,
-                    DATABASENAME
+                    DATABASE_NAME
                 ).build()
             }
         }
